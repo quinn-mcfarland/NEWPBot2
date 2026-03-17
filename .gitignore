@@ -2,6 +2,9 @@
 .vsidx
 .suo
 .db
+.db-shm
+.db-wal
+.opendb
 .json
 .slnx
 .vcxproj
@@ -13,3 +16,4 @@
 .idb
 .pdb
 .exe
+.ipch
