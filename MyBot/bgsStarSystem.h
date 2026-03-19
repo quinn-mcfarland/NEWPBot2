@@ -19,10 +19,6 @@ private:
 	int warband;
 	int blackMarket;
 public:
-	void addSystemToBoard(std::string systemName);
-	void removeSystemFromBoard(std::string systemName);
-	void contribute(std::string systemName, std::string activity, int amount);
-	void initializeBoard(long channelID);
 };
 
 #endif //BGSSTARSYSTEM_H

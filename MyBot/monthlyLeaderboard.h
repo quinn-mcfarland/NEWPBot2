@@ -5,9 +5,7 @@
 
 class monthlyLeaderboard {
 public:
-	void createLeaderboard();
-	void displayLeaderboard();
-	void contribute(std::string systemName, std::string activity, int amount);
+	
 };
 
 #endif //MONTHLYLEADERBOARD_H
