@@ -1,11 +1,1 @@
-# Gitignore for the project. Should include my VS installation, C++, and other library shinanegans.
-*.vsidx
-*.vsidx
-*.db
-*.db-shm
-*.db-wal
-*.opendb
-*.json
-*.ipch
-.vs/NewpBot/v18/.suo
-/.idea
+# Gitignore to follow for Javascript language and JetBrains WebStorm IDE
