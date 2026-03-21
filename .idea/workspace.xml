@@ -23,10 +23,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="359f892b-c486-4b81-ac1c-f82f3998a47e" name="Changes" comment="Fixed IDE issues and CMake configuration.">
-      <change beforePath="$PROJECT_DIR$/src/cmdrClass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmdrClass.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="359f892b-c486-4b81-ac1c-f82f3998a47e" name="Changes" comment="Fixed IDE issues and CMake configuration." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,7 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774074450957</updated>
       <workItem from="1774074452086" duration="3544000" />
-      <workItem from="1774116591161" duration="2420000" />
+      <workItem from="1774116591161" duration="2579000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed IDE issues and CMake configuration.">
       <option name="closed" value="true" />
