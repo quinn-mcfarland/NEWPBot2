@@ -1,5 +1,5 @@
 # Installed CMake version
-cmake_minimum_required(VERSION 4.3.0)
+cmake_minimum_required(VERSION 4.3)
 # Project name, version, and description
 project(newp-bot VERSION 1.0 DESCRIPTION "A new and improved bot for the NEWP discord server")
 
