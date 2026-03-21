@@ -17,6 +17,10 @@ cmdrClass::cmdrClass() {
 	blackMarket = 0;
 }
 
+cmdrClass::~cmdrClass() {
+
+}
+
 std::ostream &operator<<(std::ostream& out, const cmdrClass& c) {
 	out << c.cmdrName;
 	out << c.rank;
