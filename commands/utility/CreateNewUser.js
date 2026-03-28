@@ -22,6 +22,11 @@ const filename = user.username + '.json';
 
 // Helper Functions
 async function writeCmdrData() {
+    user.username = //username argument;
+        user.rank = 'Factions Ops';
+    // Grant Faction Ops role here (will need manage roles permission)
+
+    // Write the new user data to file
     let fileHandle;
 
     try {
