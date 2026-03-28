@@ -1,6 +1,6 @@
 // Module imports
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 // Global Variables
 const user = {
@@ -18,20 +18,35 @@ const user = {
     warBand: 0,
 };
 
+const filename = user.username + '.json';
+
 // Helper Functions
+async function writeCmdrData() {
+    let fileHandle;
+
+    try {
+        // Open file for writing and create it if it doesn't exist
+        fileHandle = await fs.open(filename, 'w');
+
+        // Write JSON content to file
+        await fileHande.write(user);
+
+        console.log(`Successfully wrote data to ${fileHandle}`);
+    } catch (err) {
+        console.error(`Error writing to file:`, err);
+    } finally {
+        // Close file handle
+        if (fileHandle) {
+            await fileHandle.close();
+        }
+    }
+}
 
 // Command Function
 module.exports = {
     data: new SlashCommandBuilder().setName('createnewuser').setDescription('Writes a new CMDR file'),
     async execute(interaction) {
-        const jsonData = JSON.stringify(user, null, 4);
-        fs.writeFile(`userdata/${user.username}.json`, jsonData, 'utf8', (err) => {
-            if (err) {
-                console.error('Error writing to file', err);
-            } else {
-                console.log(`Data written to output as ${user.username}`);
-            }
-        })
-        await interaction.reply(`Created a new file for user ${user.username}`);
+        writeCmdrData();
+        interaction.reply(`Created new user ${user.username}`)
     },
 };
