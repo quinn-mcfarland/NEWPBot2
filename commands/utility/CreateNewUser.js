@@ -18,40 +18,36 @@ const user = {
     warBand: 0,
 };
 
-const filename = user.username + '.json';
-
 // Helper Functions
-async function writeCmdrData() {
-    user.username = //username argument;
-        user.rank = 'Factions Ops';
-    // Grant Faction Ops role here (will need manage roles permission)
-
+async function writeCmdrData(nick) {
+    // Update the object information with new cmdr data
+    user.username = nick;
+    user.rank = 'Factions Ops';
+    // Stringify the data as it stands
+    const jsonString = JSON.stringify(user, null, 4);
     // Write the new user data to file
-    let fileHandle;
-
     try {
-        // Open file for writing and create it if it doesn't exist
-        fileHandle = await fs.open(filename, 'w');
-
-        // Write JSON content to file
-        await fileHande.write(user);
-
-        console.log(`Successfully wrote data to ${fileHandle}`);
+        fs.writeFile(`./userdata/${nick}.json`, jsonString);
     } catch (err) {
-        console.error(`Error writing to file:`, err);
-    } finally {
-        // Close file handle
-        if (fileHandle) {
-            await fileHandle.close();
-        }
+        console.error(err);
     }
 }
 
 // Command Function
 module.exports = {
-    data: new SlashCommandBuilder().setName('createnewuser').setDescription('Writes a new CMDR file'),
+    data: new SlashCommandBuilder()
+        .setName('createnewuser')
+        .setDescription('Writes a new CMDR file')
+        .addUserOption((option) =>
+            option
+                .setName('target')
+                .setDescription('The new user to onboard')
+                .setRequired(true)),
     async execute(interaction) {
-        writeCmdrData();
-        interaction.reply(`Created new user ${user.username}`)
+        const targetUser = interaction.options.getUser('target');
+        const targetName = targetUser.username;
+
+        await writeCmdrData(targetName);
+        await interaction.reply(`Created new user: ${targetName}`)
     },
 };
