@@ -1,5 +1,6 @@
 # Gitignore to follow for Javascript language and JetBrains WebStorm IDE
 /.idea
-node_modules
-.env
 config.json
+/monthlyleaderboard
+/node_modules
+/userdata
