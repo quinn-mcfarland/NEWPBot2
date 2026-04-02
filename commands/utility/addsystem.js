@@ -16,16 +16,22 @@ module.exports = {
                 .setDescription('Is this a BGS or Powerplay system')
                 .setRequired(true)),
     async execute(interaction) {
-        const systemName = interaction.options.getString('name');
-        const systemType = interaction.options.getString('type');
+        // Defer reply as early as possible (this should be on all commands)
+        await interaction.deferReply();
 
+        // Get relevant interaciton data
+        const systemName = interaction.options.getString('name');
+        const systemType = (interaction.options.getString('type')).toLowerCase();
+
+        // Create the new system in the relevant array
         try {
-            if (systemType.toLowerCase() === 'bgs') {
+            if (systemType === 'bgs') {
                 effortdata.activeBgsSystems.push(new effortdata.BGSSystem(systemName));
-            } else if (systemType.toLowerCase() === 'powerplay') {
+            } else if (systemType === 'powerplay') {
                 effortdata.activePowerplaySystems.push(new effortdata.PowerplaySystem(systemName));
+                await interaction.editReply(`Created new system ${systemName}`);
             } else {
-                await interaction.reply({
+                await interaction.editReply({
                     content: `Error creating new system. System must be either BGS or Powerplay.`,
                     flags: MessageFlags.Ephemeral,
                 });
