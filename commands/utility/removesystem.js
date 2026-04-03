@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require("discord.js");
-const effortdata = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
+const effortdata = require('/Users/quinnmcfarland/Repos/NEWPBot2/effortdata.js');
 
 module.exports = {
     data: new SlashCommandBuilder()

@@ -1,7 +1,7 @@
 // Module imports
 const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs').promises;
-const { User } = require('/Users/quinnmcfarland/Documents/GitHub/NEWPBot2/effortdata.js');
+const { User } = require('/Users/quinnmcfarland/Repos/NEWPBot2/effortdata.js');
 
 // Command Function
 module.exports = {
