@@ -1,5 +1,5 @@
 // Module Imports
-const { SlashCommandBuilder, TextDisplayBuilder, MessageFlags} = require('discord.js');
+const { SlashCommandBuilder, TextDisplayBuilder, MessageFlags, Client } = require('discord.js');
 const { activeBgsSystems, activePowerplaySystems } = require('/Users/quinnmcfarland/Repos/NEWPBot2/effortdata.js');
 const { createTable } = require('@visulima/tabular');
 
@@ -51,6 +51,7 @@ const effortBoardTextDisplay = new TextDisplayBuilder().setContent(
 
 // Command Execution
 module.exports = {
+    cooldown: 5,
     data: new SlashCommandBuilder()
         .setName('displayeffortboard')
         .setDescription('Create an effort board and send it to a channel to be tracked')
@@ -65,27 +66,24 @@ module.exports = {
 
         // Grab Interaction Data
         const boardType = (interaction.options.getString('boardtype')).toLowerCase();
-        let channel;
 
         // Differentiate what happens between BGS or Powerplay
         try {
             if (boardType === 'bgs') {
                 await displayTableBuilder(activeBgsSystems);
-                channel = await client.channels.fetch('1483314368748847308');
-                await channel.send({
+                await Client.channels.get('1483314368748847308').send({
                     components: [effortBoardTextDisplay],
                     flags: MessageFlags.IsComponentV2,
                 });
             } else if (boardType === 'powerplay') {
                 await displayTableBuilder(activePowerplaySystems);
-                channel = await client.channels.fetch('1483314368748847308');
                 await channel.send({
                     components: [effortBoardTextDisplay],
                     flags: MessageFlags.IsComponentV2,
                 });
             } else {
                 await interaction.editReply({
-                    content: `[ERROR] boardtype must be either BGS or Powerplay`,
+                    content: `[WARNING] boardtype must be either BGS or Powerplay`,
                     flags: MessageFlags.Ephemeral,
                 });
             }
