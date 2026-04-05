@@ -16,7 +16,7 @@ module.exports = {
                 .setDescription('Is this a BGS or Powerplay system')
                 .setRequired(true)),
     async execute(interaction) {
-        // Defer reply as early as possible (this should be on all commands)
+        // Defer reply
         await interaction.deferReply();
 
         // Get relevant interaciton data
