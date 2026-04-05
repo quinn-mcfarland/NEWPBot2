@@ -1,5 +1,5 @@
 // Module Imports
-const { SlashCommandBuilder, TextDisplayBuilder, MessageFlags } = require('discord.js');
+const { SlashCommandBuilder, TextDisplayBuilder, MessageFlags} = require('discord.js');
 const { activeBgsSystems, activePowerplaySystems } = require('/Users/quinnmcfarland/Repos/NEWPBot2/effortdata.js');
 const { createTable } = require('@visulima/tabular');
 
@@ -19,20 +19,28 @@ async function displayTableBuilder(startingArray) {
     let keyArray = Object.keys(startingArray[0]);
 
     // Header Builder (row a)
-    for (let a = 0; a < startingArray.length; a++) {
-        headingArray.push(startingArray[a].name);
+    try {
+        for (let a = 0; a < startingArray.length; a++) {
+            headingArray.push(startingArray[a].name);
+        }
+        await displayTable.setHeaders(headingArray);
+    } catch(error) {
+        console.error(error);
     }
-    await displayTable.setHeaders(headingArray);
 
     // Row Builder
-    for(let b = 1; b < keyArray.length; b++) {
-        let currentRow = [];
+    try {
+        for (let b = 1; b < keyArray.length; b++) {
+            let currentRow = [];
 
-        for(let c = 0; c < startingArray.length; c++) {
-            let valueArray = Object.values(startingArray[c]);
-            currentRow.push(`${keyArray[b].substring(1)}: ${valueArray[b]}`);
+            for (let c = 0; c < startingArray.length; c++) {
+                let valueArray = Object.values(startingArray[c]);
+                currentRow.push(`${keyArray[b].substring(1)}: ${valueArray[b]}`);
+            }
+            await displayTable.addRow(currentRow);
         }
-        await displayTable.addRow(currentRow);
+    } catch(error) {
+        console.error(error);
     }
 }
 
@@ -60,25 +68,30 @@ module.exports = {
         let channel;
 
         // Differentiate what happens between BGS or Powerplay
-        if (boardType === 'bgs') {
-            await displayTableBuilder(activeBgsSystems);
-            channel = '1483314368748847308';
-            await channel.send({
-                components: [effortBoardTextDisplay],
-                flags: MessageFlags.IsComponentV2,
-            });
-        } else if (boardType === 'powerplay') {
-            await displayTableBuilder(activePowerplaySystems);
-            channel = '1483314368748847308';
-            await channel.send({
-                components: [effortBoardTextDisplay],
-                flags: MessageFlags.IsComponentV2,
-            });
-        } else {
-            interaction.editReply({
-                content: `[ERROR] boardtype must be either BGS or Powerplay`,
-                flags: MessageFlags.Ephemeral,
-            });
+        try {
+            if (boardType === 'bgs') {
+                await displayTableBuilder(activeBgsSystems);
+                channel = await client.channels.fetch('1483314368748847308');
+                await channel.send({
+                    components: [effortBoardTextDisplay],
+                    flags: MessageFlags.IsComponentV2,
+                });
+            } else if (boardType === 'powerplay') {
+                await displayTableBuilder(activePowerplaySystems);
+                channel = await client.channels.fetch('1483314368748847308');
+                await channel.send({
+                    components: [effortBoardTextDisplay],
+                    flags: MessageFlags.IsComponentV2,
+                });
+            } else {
+                await interaction.editReply({
+                    content: `[ERROR] boardtype must be either BGS or Powerplay`,
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            interaction.editReply(`[ERROR] ${error}`);
         }
     },
 };

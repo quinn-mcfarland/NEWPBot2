@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const fs = require('fs').promises;
 const { activeBgsSystems, activePowerplaySystems} = require('/Users/quinnmcfarland/Repos/NEWPBot2/effortdata.js');
 
